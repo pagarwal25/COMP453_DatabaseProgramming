@@ -1,0 +1,25 @@
+.inputStyle{
+    border-radius: 7px;
+	box-shadow:inset 0 0 7px #D4D4D4;
+	
+	height: 40px;
+	font-size: 0.8em;
+	border: 1px solid #D4D4D4;
+	width:400px ;
+}
+#email:focus {
+	
+	border: 1px solid #FFCD28;
+	border-radius:7px;
+	box-shadow:inset 0 0 7px #FFCD28;
+ }
+
+#password:focus {
+	border: 1px solid #FFCD28;
+	border-radius:7px;
+	box-shadow:inset 0 0 7px #FFCD28;
+ }
+	 
+:focus {
+	outline: none; 
+	}
