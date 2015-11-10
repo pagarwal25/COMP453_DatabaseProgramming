@@ -14,12 +14,15 @@
 <center>
 <h3>Register to save your favorite  homes</h3>
 
-<form>
+<form action="processNewUser.html.php" method="POST">
  
-		<input class ="inputStyle" type="text" id="email" placeholder=" Enter email address">
+		<input class ="inputStyle" type="text" id="email" name="email" placeholder=" Enter email address">
 		<br/>
 		<br/>
-		<input class ="inputStyle" type="text" id="password" placeholder=" Create Password 5-15 characters long")">			
+		<input class ="inputStyle" type="text" id="password" name="password" placeholder=" Create Password 5-15 characters long">	
+		<br/>
+		<br/>
+		<input class ="inputStyleSubmit" type="Submit" id="submit" value="submit">
 		
 </form>
 </center>

@@ -23,3 +23,18 @@
 :focus {
 	outline: none; 
 	}
+	
+	
+.inputStyleSubmit{
+    border-radius: 7px;
+	background-color:#FF8732;
+	color:white;
+	height: 40px;
+	font-size: 0.8em;
+	border: 1px solid #FF8732;
+	width:400px ;
+	cursor:pointer;
+}
+
+
+	
