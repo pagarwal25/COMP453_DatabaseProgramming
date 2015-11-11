@@ -45,6 +45,6 @@ echo 'Sign-up complete. You are a member now.';
 </head>
 <body>
 
-    <p><a href="index.php">Let's get started</a></p>
+    <p><a href="listingPage.php">Let's get started</a></p>
 </body>
 </html>

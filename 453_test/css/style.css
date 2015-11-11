@@ -36,5 +36,34 @@
 	cursor:pointer;
 }
 
+.navbar{
+	position:relative;
+	min-height:50px;
+	margin-bottom: 20px;
+	border:1px solid transparent;
+}
+.nav-default{
+	background-color:#f8f8f8;
+	border-color:#e7e7e7;
+}
 
-	
+.nav-fixed-top{
+top:0px;
+border-top-width:0px;
+border-bottom-width:1px;
+border-left-width:0px;
+border-right-width:0px;
+}
+
+
+
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+margin-right:15px;
+float:right!important;
+margin-top:1em;
+}
+
