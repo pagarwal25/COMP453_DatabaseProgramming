@@ -1,5 +1,7 @@
 <html>
 <head>
+<script type="text/javascript" src="js/Validation.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Cozy Homes' - Administrator</title>
 <head>
 <body a link="black" vlink="black">
@@ -7,7 +9,26 @@
 <center><h1>Cozy Homes'</h1></center>
 
 <!--Menu -->
-<center><a href="index.html">Home</a> | <a href="newUser.html">New-User</a> | <a href="existingUser.html">Existing-User</a> | <b>Administrator</b> | <a href="aboutUs.html">About US</a></center>
+<center><a href="index.html">Home</a> | <a href="newUser.html">New-User</a> | <a href="existingUser.html.php">Existing-User</a> | <b>Administrator</b> | <a href="aboutUs.html">About US</a></center>
+
+<br/>
+<center>
+<h3>Administrator Login </h3>
+
+<form action="processNewUser.html.php" method="POST">
+ 
+		<input class ="inputStyle" type="text" id="email" name="email" placeholder=" Enter email address">
+		<br/>
+		<br/>
+		<input class ="inputStyle" type="text" id="password" name="password" placeholder=" Enter Password">	
+		<br/>
+		<br/>
+		<input class ="inputStyleSubmit" type="Submit" id="submit" value="submit">
+		
+</form>
+
+
+</center>
 
 </body>
 </html>

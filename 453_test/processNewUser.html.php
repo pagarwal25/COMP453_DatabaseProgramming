@@ -1,50 +1,70 @@
-<?php
 
-$username = $_POST['email'];
-$password = $_POST['password'];
 
-/* $hashPassword = password_hash($password,PASSWORD_DEFAULT); */
-
-try{
-	
-	$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $pdo->exec('SET NAMES "utf8"');
-	
-}
-
-catch(PDOException $e){
-	$error = 'Unable to connect to server';
-	include 'error.html.php';
-	exit();
-}
-
-try{
-	$sql = 'insert into userdetails SET 
-									UserName=:email,
-									PwdHash=:password';
-	$s = $pdo->prepare($sql);
-	$s->bindValue(':email', $username);
-    $s->bindValue(':password',$password);
-	
-	$s->execute();
-}
-catch(PDOException $e){
-	$error = 'Unable to insert login and passwordhash';
-	include 'error.html.php';
-	exit();
-}
-
-echo 'Sign-up complete. You are a member now.';
-
-?>
-
+<!doctype html>
 <html>
-<head>
+    <head>
+        <style>
+ 
+           body{font-family:Verdana;}
+		   td {  padding: 15px;} 
+		   .inputStyle{
+    border-radius: 7px;
+	box-shadow:inset 0 0 7px #D4D4D4;
+	
+	height: 40px;
+	font-size: 0.8em;
+	border: 1px solid #D4D4D4;
+	width:300px ;
+}
+input:focus {outline:none;}
 
-</head>
-<body>
-
-    <p><a href="listingPage.php">Let's get started</a></p>
-</body>
+.inputStyleSubmit{
+    border-radius: 7px;
+	background-color:#FF8732;
+	color:white;
+	height: 40px;
+	font-size: 0.8em;
+	border: 1px solid #FF8732;
+	width:200px ;
+	cursor:pointer;
+	
+}
+        </style>
+    </head>
+    <body>
+        <center>
+            <form action="listingpage.html.php" method="POST">
+                <h2>Fill the form to become a member:</h2>
+                <table>
+				<tr>
+				<td><label for="username">Username *: </label></td>
+				<td><input class="inputStyle type="text" id="username" name="username" /></td>
+				</tr>
+                <td><label for="password">Password *: </label></td><td><input class="inputStyle" type="password" id="password" name="password"/></td>
+				</tr>
+                <!-- You may want to consider adding a "confirm" password box also -->
+                
+                             
+                <tr>
+				<td><label for="email">Email *: </label></td><td><input class="inputStyle type="email" id="email" name="email"/></td>
+				</tr>
+				
+                <!-- Valid input types: http://www.w3schools.com/html5/html5_form_input_types.asp -->
+                <tr>
+				<td><label for="tel">Telephone: </label></td><td><input class="inputStyle type="text" id="tel" name="telephone"/></td>
+				</tr>
+                
+                <tr>
+				<td><label for="zip">Post Code: </label></td><td><input class="inputStyle type="text" id="zip"  name="zip"/></td>
+				</tr>
+                <tr>
+				<td></td>
+				<td align="right"><input class="inputStyleSubmit" type="submit" value="Submit" onclick="member()" /></td></tr>
+ </table >
+                <p>Note: Please make sure your details are correct before submitting form and that all fields marked with * are completed!.</p>
+          
+		   </form>
+		   </center>
+        
+    </body>
 </html>
