@@ -41,10 +41,14 @@
 	min-height:50px;
 	margin-bottom: 20px;
 	border:1px solid transparent;
+	width:100%;
+	
+	
 }
 .nav-default{
 	background-color:#33cc33;
 	border-color:#e7e7e7;
+	top:0px;
 }
 
 .nav-fixed-top{
@@ -53,6 +57,7 @@ border-top-width:0px;
 border-bottom-width:1px;
 border-left-width:0px;
 border-right-width:0px;
+
 }
 
 
@@ -85,5 +90,42 @@ color:white;
 
 body{
 	background-color:#f8f8f8;
+	margin:0px;
 }
 
+#ileftframe {
+    height: 99%;
+    width: 20%;
+}
+
+#ileftdiv {
+	float: left;
+   width: 20%;	
+   margin-top: 10px;
+   height: 100%;
+   
+}
+
+#iRightFrame {
+	width: 100%;
+	content:center;
+	height: 100%;
+}
+
+#iRightDiv{
+	float:left;
+	width: 80%;
+	margin-top: 10px;
+	height: 100%;
+}
+.inputForm div{
+	padding-bottom : 15px
+	
+}
+.bodycontent{
+	height: 80vh;
+	float: left;
+width: 97%;
+padding-left:1%;
+padding-right:1%;
+}
