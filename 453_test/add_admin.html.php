@@ -1,13 +1,10 @@
 <?php
 
-if(isset($_POST['telephone'])){
 
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+
 $email = $_POST['email'];
-$telephone = $_POST['telephone'];
-$PostCode = $_POST['zip'];
+$password = $_POST['password'];
 
 try
 {
@@ -26,30 +23,46 @@ catch (PDOException $e)
 
 try
   {
-    $sql = 'INSERT INTO userdetails SET
-        UserName = :username,
-        Password = :password,
-        email = :email,
-        telephone=:telephone,
-		PostCode=:zipcode';
-    $s = $pdo->prepare($sql);
-    $s->bindValue(':username', $username);
-    $s->bindValue(':password', $password);
-    $s->bindValue(':email', $email);
-	$s->bindValue(':telephone', $telephone);
-	$s->bindValue(':zipcode', $PostCode);
 
-    $s->execute();
-  }
-  catch (PDOException $e)
-  {
+            $sql="select UserName,PwdHash from admindetails where UserName='$email' ";// fetching Username and compare it with testbox adminid.
+          $result = $pdo->query($sql);
+
+          if($result->rowcount()== 0)
+          {
+            echo "AdminId or password incorrect!";
+            $database_adminid=" ";
+            $database_password=" ";
+          }
+          else
+          {
+            foreach($result as $row)//fetching adminid and password from DB as it's a more than 1 column, let's put foreach
+            { $database_adminid= $row['UserName'];
+              $database_password= $row['PwdHash'];
+            }
+
+          }
+
+          if($database_adminid==$email && $database_password==$password)
+            {
+            echo "login successfull!!!";
+            }
+
+          else
+           {
+            echo "Login Unsuccessful!! Try again!!";
+           }
 
   }
-}
-else
+catch (Exception $e)
 {
-	$username= $_GET['username'];
+  echo $e;
+  $error = 'Database error ';
+  include 'error.html.php';
+  exit();
 }
+
+
+
 
 try
 {
@@ -126,7 +139,7 @@ while ($row = $result->fetch()){
             <li><a href="">Bhooo</a></li>
             <li><a href="">Bhaaoo</a></li>
             <li><a href="">Bhootttttt</a></li> -->
-			<li><a href="">Welcome <?php echo $username;?>!</a></li>
+			<li><a href="">Welcome <?php echo $email;?>!</a></li>
 	</ul>
  </div>
 </nav>
@@ -136,7 +149,7 @@ while ($row = $result->fetch()){
 	<div>
 
 
-        <input type="hidden" name="username" id="username" value="<?php echo $username;?>">
+        <input type="hidden" name="email" id="email" value="<?php echo $email;?>">
     </div>
 
 	<div>
@@ -182,9 +195,16 @@ while ($row = $result->fetch()){
 		<?php endforeach; ?>
 		</select>
      </div>
+
 	 <div>
      <input type="submit" value="Search">
 	 </div>
+   <div>
+     <input type="button" onClick="location.href='add_property.php'" value="Add new property">
+     <input type="button" onClick="location.href='add_property.php'" value="Modify property">
+     <input type="button" onClick="location.href='add_property.php'" value="Delete property">
+
+   </div>
     </form>
 </div>
 

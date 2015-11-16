@@ -9,13 +9,13 @@ $username =$_POST['username'];
 try
 {
 
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
+  $pdo = new PDO('mysql:host=localhost;dbname=cozyhomes', 'root', 'c5shreelawns');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->exec('SET NAMES "utf8"');
 }
 catch (PDOException $e)
 {
-  
+
   $error = 'Unable to connect to the database server.';
   include 'error.html.php';
   exit();
@@ -32,7 +32,7 @@ try{
 				   property.ZipCode,
 				   property.PhoneNo,
 				   property.Rating
-			FROM Property, Apartment, propertytype 
+			FROM Property, Apartment, propertytype
 			WHERE propertytype.TypeID= apartment.TypeID AND
 				  apartment.PropertyID = property.PropertyID AND
 				  propertytype.TypeName = :TypeName AND
@@ -44,8 +44,8 @@ try{
 	$s->bindValue(':ZipCode', $zipcode);
 	$s->bindValue(':TypeName', $type);
 	$s->execute();
-	$result = $s->fetchAll();	
-	
+	$result = $s->fetchAll();
+
 	//$result = $pdo->query($sql);
 }
 
@@ -55,12 +55,12 @@ catch (PDOException $e)
   include 'error.html.php';
   exit();
   }
-  
+
   echo "data fetched";
-  
-  
-  
-  
+
+
+
+
   if (isset($_POST['like'])){
 	  echo "entered if";
 		$ApartmentID = $_POST['ApartmentID'];
@@ -71,7 +71,7 @@ catch (PDOException $e)
 		$Address = $_POST['Address'];
 		$ZipCode = $_POST['ZipCode'];
 		$PhoneNo = $_POST['PhoneNo'];
-		
+
 		try
 		{
 
@@ -81,12 +81,12 @@ catch (PDOException $e)
 		}
 		catch (PDOException $e)
 		{
-  
+
 		$error = 'Unable to connect to the database server.';
 		include 'error.html.php';
 		exit();
 		}
-		
+
 		 try
 		{
 		$sql = 'INSERT INTO userinterest SET
@@ -109,7 +109,7 @@ catch (PDOException $e)
 		$s->bindValue(':Address', $Address);
 		$s->bindValue(':ZipCode', $ZipCode);
 		$s->bindValue(':PhoneNo', $PhoneNo);
-    
+
 		$s->execute();
 		}
 		catch (PDOException $e)
@@ -143,7 +143,7 @@ padding:5px;
 <body>
 
     <h3>List of all the options:</h3>
-   
+
     <center>
 	<table >
 	<tr>
@@ -155,7 +155,7 @@ padding:5px;
 	<th>ZipCode</th>
 	<th>PhoneNo</th>
 	<th>Rating</th>
-	
+
 	</tr>
     <?php foreach($result as $Apartment): ?>
       <tr>
@@ -177,17 +177,17 @@ padding:5px;
 				<input type="hidden" name="Address" value="<?php echo $Apartment['Address']; ?>">
 				<input type="hidden" name="ZipCode" value="<?php echo $Apartment['ZipCode']; ?>">
 				<input type="hidden" name="PhoneNo" value="<?php echo $Apartment['PhoneNo']; ?>">
-				
+
 				<input type="hidden" name="zipcode" value="<?php echo $zipcode; ?>">
 				<input type="hidden" name="minPrice" value="<?php echo $priceMin; ?>">
 				<input type="hidden" name="maxPrice" value="<?php echo $priceMax; ?>">
 				<input type="hidden" name="Property_type" value="<?php echo $type; ?>">
 				<input type="hidden" name="username" value="<?php echo $username; ?>">
-				
+
 				<button type="submit" name="like"><i class="glyphicon glyphicon-thumbs-up"></i></button>
 			</form>
 		 </td>
-         <!-- <td>  
+         <!-- <td>
          <form action="?deleteDept" method="post">
           <input type="hidden" name="id" value="<?php echo $department['dnumber']; ?>">
          <input type="submit" value="delete">
@@ -197,6 +197,6 @@ padding:5px;
     <?php endforeach; ?>
     </table>
 	</center>
-   
+
   </body>
 </html>
