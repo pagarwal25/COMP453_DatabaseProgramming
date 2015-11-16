@@ -91,11 +91,17 @@ while ($row = $result->fetch()){
 	function sliderChangeMin(val)
 	{
 		document.getElementById('sliderStatusMin').innerHTML = val;
+		var minPrice= document.getElementById('minPrice');
+		minPrice.value = val;
+		
 	}
 	function sliderChangeMax(val)
 	{
 		document.getElementById('sliderStatusMax').innerHTML = val;
+		var maxPrice= document.getElementById('maxPrice');
+		maxPrice.value = val;
 	}
+	
 	</script>
 	
 	<!--  <meta name="viewport" content="width=device-width, initial-scale=1">  -->
@@ -128,6 +134,12 @@ while ($row = $result->fetch()){
 <div id="ileftdiv">
 	<form action="rightResult.html.php"  method="post" id="input_form" name="inputform" class="inputForm" target="rightFrame">
 	<div>
+     
+	 
+        <input type="hidden" name="username" id="username" value="<?php echo $username;?>">
+    </div>
+	
+	<div>
      <label for="zipcode">ZipCode:</label></br>
 	 
         <input type="text" name="zipcode" id="zipcode">
@@ -144,7 +156,8 @@ while ($row = $result->fetch()){
 	 <div>
 	  <label for="price-min">Price Min.:</label>
 	  <br/>
-	  <input type="range" min="500" max="7000" steps="10" value="500" onChange="sliderChangeMin(this.value)"/><span id="sliderStatusMin">500</span>
+	  <input type="range" min="500" max="7000" steps="10" value="500"  onChange="sliderChangeMin(this.value)"/><span id="sliderStatusMin">500</span>
+	  <input type="hidden" id="minPrice" name="minPrice">
 	  <br/>
 	  	  
 	 </div>
@@ -152,8 +165,9 @@ while ($row = $result->fetch()){
 	 <div>
 	  <label for="price-max">Price Max.:</label>
 	  <br/>
-	  <input type="range" min="500" max="7000" steps="10" value="500" onChange="sliderChangeMax(this.value)"/><span id="sliderStatusMax">500</span>
-	  <br/>
+	  <input type="range" min="500" max="7000" steps="10" value="500"  onChange="sliderChangeMax(this.value)"/><span id="sliderStatusMax">500</span>
+	  <input type="hidden" id="maxPrice" name="maxPrice">
+	 <br/>
 	  	  
 	 </div>
 	 
@@ -169,13 +183,13 @@ while ($row = $result->fetch()){
 		</select>
      </div>
 	 <div>
-     <input type="submit" value="Search">
+     <input type="submit" value="Search" onclick="javascript:ajax_post();">
 	 </div>
     </form>
 </div>
 
 <div id="iRightDiv">
-	<iframe id="iRightFrame" src="right.html.php" scrolling="No" frameBorder="1" name="rightFrame" />
+	<iframe id="iRightFrame" src="right.html.php" scrolling="Yes" frameBorder="1" name="rightFrame" />
 </div>
 
 
