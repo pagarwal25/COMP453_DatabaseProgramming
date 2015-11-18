@@ -39,7 +39,9 @@ $password=$_POST['password'];
 
 try{
 
-$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
+
+$pdo = new PDO('mysql:host=localhost;dbname=cozyhomes', 'root', 'c5shreelawns');
+
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->exec('SET NAMES "utf8"');
 
@@ -53,7 +55,7 @@ catch(PDOException $e){
 
 
 
-$sql = 'select password from userdetails where Exists (select username from userdetails where UserName=:username)';
+$sql = 'select PWDHash from userdetails where Exists (select username from userdetails where UserName=:username)';
 
 
 $s = $pdo->prepare($sql);
@@ -65,7 +67,7 @@ $s = $pdo->prepare($sql);
 
 if($password_db == $password)
 {
-header('Location: listingPage.html.php?username='.urlencode($username));
+header('Location: listingPage.html.php?username='.urlencode($username));// this will take you to the listing page and it will display welcome "username"
 //include 'listingPage.html.php';
  // header('Location: listingPage.html.php'.$username);
 }
