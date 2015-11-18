@@ -59,7 +59,7 @@ input:focus {outline:none;}
 				</tr>
                 <tr>
 				<td></td>
-				<td align="right"><input class="inputStyleSubmit" type="submit" value="Submit" onclick="member()" /></td></tr>
+				<td align="right"><input class="inputStyleSubmit" type="submit" value="Submit" /></td></tr>
  </table >
                 <p>Note: Please make sure your details are correct before submitting form and that all fields marked with * are completed!.</p>
           

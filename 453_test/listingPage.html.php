@@ -86,7 +86,7 @@ while ($row = $result->fetch()){
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
 	<script type="text/javascript">
 	function sliderChangeMin(val)
 	{
@@ -104,31 +104,63 @@ while ($row = $result->fetch()){
 	
 	</script>
 	
-	<!--  <meta name="viewport" content="width=device-width, initial-scale=1">  -->
-	<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
-	<!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>  -->
-	<!-- <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>  -->
-	
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	
 </head>
-<body a link="black" vlink="white">
+<body a link="black" vlink="black" style="font-family:Constantia;">
 <div id="everything">
 <nav class= "navbar nav-default  nav-fixed-top">
-<div id="navlist">
+
+<div class="container-fluid">
+   
+    <div id="content">
+      <ul id="navlist">
+       <p style="font-family:Constantia;">Cozy Homes'</p>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="edit.html.php?username=<?php echo $username;?>">Edit</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="index.html">Logout</a></li> 
+          </ul>
+        </li>
+		 <li class="active"><a href="#">Welcome <?php echo $username;?>!</a></li>
+       
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+
+<!--<div id="navlist">
 <p> Cozy Homes'</p>
 </div>
 <div id="content">
 	<ul id="navlist">
-			<!-- <li><a href="">Bla</a></li>
-            <li><a href="">More bla</a></li>
-            <li><a href="">Super bla</a></li>
-            <li><a href="">Bhooo</a></li>
-            <li><a href="">Bhaaoo</a></li>
-            <li><a href="">Bhootttttt</a></li> -->
-			<li><a href="">Welcome <?php echo $username;?>!</a></li>
+			
+			
+			
+			
+			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
+			
+			<ul class="dropdown-menu">
+            <li><a href="#">edit</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="#">Logout</a></li> 
+			</ul>
+			</li>
+            <li><a href="">Welcome <?php echo $username;?>!</a></li>
+			
 	</ul>
- </div>
+ </div> -->
 </nav>
 <div class="bodycontent">
 <div id="ileftdiv">
@@ -142,7 +174,7 @@ while ($row = $result->fetch()){
 	<div>
      <label for="zipcode">ZipCode:</label></br>
 	 
-        <input type="text" name="zipcode" id="zipcode">
+        <input class="inputStyle_left" type="text" name="zipcode" id="zipcode">
     </div>
 	
 	
@@ -156,7 +188,7 @@ while ($row = $result->fetch()){
 	 <div>
 	  <label for="price-min">Price Min.:</label>
 	  <br/>
-	  <input type="range" min="500" max="7000" steps="10" value="500"  onChange="sliderChangeMin(this.value)"/><span id="sliderStatusMin">500</span>
+	  <input type="range" min="500" max="7000" steps="10" value="500"  onChange="sliderChangeMin(this.value)"/><br/><span id="sliderStatusMin">500</span>
 	  <input type="hidden" id="minPrice" name="minPrice">
 	  <br/>
 	  	  
@@ -165,7 +197,7 @@ while ($row = $result->fetch()){
 	 <div>
 	  <label for="price-max">Price Max.:</label>
 	  <br/>
-	  <input type="range" min="500" max="7000" steps="10" value="500"  onChange="sliderChangeMax(this.value)"/><span id="sliderStatusMax">500</span>
+	  <input type="range" min="500" max="7000" steps="10" value="500"  onChange="sliderChangeMax(this.value)"/><br/><span id="sliderStatusMax">500</span>
 	  <input type="hidden" id="maxPrice" name="maxPrice">
 	 <br/>
 	  	  
@@ -174,7 +206,7 @@ while ($row = $result->fetch()){
 	 
 	<div>
       <label for="Property_type">Property Type:</label></br>
-        <select name="Property_type" style="width:200px">
+        <select class="inputStyle_left" name="Property_type" style="width:200px">
 		<option value="select">--Select--</option>
 		<?php foreach($TypeName as $TypeName_d): ?>
 		
@@ -183,7 +215,7 @@ while ($row = $result->fetch()){
 		</select>
      </div>
 	 <div>
-     <input type="submit" value="Search" onclick="javascript:ajax_post();">
+     <input class="inputStyleSubmit_left" type="submit" value="Search" id="search">
 	 </div>
     </form>
 </div>
