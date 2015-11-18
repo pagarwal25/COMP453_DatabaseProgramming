@@ -201,8 +201,8 @@ while ($row = $result->fetch()){
 	 </div>
    <div>
      <input type="button" onClick="location.href='add_property.php'" value="Add new property">
-     <input type="button" onClick="location.href='add_property.php'" value="Modify property">
-     <input type="button" onClick="location.href='add_property.php'" value="Delete property">
+     <input type="button" onClick="location.href='modify_property.php'" value="Modify property">
+     <input type="button" onClick="location.href='delete_property.php'" value="Delete property">
 
    </div>
     </form>
