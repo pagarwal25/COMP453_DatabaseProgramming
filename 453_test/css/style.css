@@ -108,7 +108,7 @@ border-right-width:0px;
 
 
 
-#navlist li
+#navlist .headerItem
 {
 display: inline;
 list-style-type: none;
@@ -118,8 +118,10 @@ float:right!important;
 margin-top:1em;
 font-size:1.0em;
 
-
 }
+
+
+
 
 #navlist p
 {

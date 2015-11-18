@@ -10,7 +10,7 @@ try
 {
 
 
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
+  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
 
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->exec('SET NAMES "utf8"');
@@ -59,51 +59,8 @@ catch (PDOException $e)
   }
 
   
-try{
-	  
-	$sql1 = 'SELECT * from userinterest where UserName = :username and userinterest.ApartmentID IN (
 
-						SELECT Apartment.ApartmentID
-						FROM Property, Apartment, propertytype 
-						WHERE propertytype.TypeID= apartment.TypeID AND
-						apartment.PropertyID = property.PropertyID AND
-						propertytype.TypeName = :TypeName AND
-						property.ZipCode = :ZipCode AND
-						Price BETWEEN :minPrice AND :maxPrice)';
-	 $s = $pdo->prepare($sql1);
-	 $s->bindValue(':username', $username);
-    $s->bindValue(':minPrice', $priceMin);
-    $s->bindValue(':maxPrice', $priceMax);
-	$s->bindValue(':ZipCode', $zipcode);
-	$s->bindValue(':TypeName', $type);
-	$s->execute();
-	$result1 = $s->fetchAll();	
-	
-	
-	$class = ($result1 > 0)? 'class="recorded"' : '';
-	
-}
-catch (PDOException $e)
-{
   
-  $error = 'Unable to connect to the database server.';
-  include 'error.html.php';
-  exit();
-}
-  
- 
-  
-  
-  
-  
-
-
-  echo "data fetched";
-
-
-
-
-
   if (isset($_POST['like'])){
 	  
 	  
@@ -123,7 +80,7 @@ catch (PDOException $e)
 		try
 		{
 
-		$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
+		$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$pdo->exec('SET NAMES "utf8"');
 		}
@@ -214,14 +171,7 @@ catch (PDOException $e)
 			}
 		}
 					
-					
-					
-					
-					
-
-
-		 
-		
+	
 		
 		
 		 }
@@ -234,6 +184,42 @@ catch (PDOException $e)
 		exit();
 		}
   }
+  
+  
+  try{
+	  
+	$sql1 = 'SELECT * from userinterest where UserName = :username and userinterest.ApartmentID IN (
+
+						SELECT Apartment.ApartmentID
+						FROM Property, Apartment, propertytype 
+						WHERE propertytype.TypeID= apartment.TypeID AND
+						apartment.PropertyID = property.PropertyID AND
+						propertytype.TypeName = :TypeName AND
+						property.ZipCode = :ZipCode AND
+						Price BETWEEN :minPrice AND :maxPrice)';
+	 $s = $pdo->prepare($sql1);
+	 $s->bindValue(':username', $username);
+    $s->bindValue(':minPrice', $priceMin);
+    $s->bindValue(':maxPrice', $priceMax);
+	$s->bindValue(':ZipCode', $zipcode);
+	$s->bindValue(':TypeName', $type);
+	$s->execute();
+	$result1 = $s->fetchAll();	
+	
+	
+	$class = ($result1 > 0)? 'class="recorded"' : '';
+	
+}
+catch (PDOException $e)
+{
+  
+  $error = 'Unable to connect to the database server.';
+  include 'error.html.php';
+  exit();
+}
+  
+  
+  
 ?>
 
 

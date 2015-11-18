@@ -12,11 +12,9 @@ $PostCode = $_POST['zip'];
 try
 {
 
-<<<<<<< HEAD
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
-=======
+
   $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
->>>>>>> 4b4996e7d71cffa1b7720b72b150348580db3a62
+
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->exec('SET NAMES "utf8"');
 }
@@ -59,7 +57,7 @@ try
 {
 
 
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
+  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
 
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->exec('SET NAMES "utf8"');
@@ -126,7 +124,7 @@ while ($row = $result->fetch()){
     <div id="content">
       <ul id="navlist">
        <p style="font-family:Constantia;">Cozy Homes'</p>
-        <li class="dropdown">
+        <li class="dropdown headerItem">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -135,7 +133,7 @@ while ($row = $result->fetch()){
             <li><a href="index.html">Logout</a></li> 
           </ul>
         </li>
-		 <li class="active"><a href="#">Welcome <?php echo $username;?>!</a></li>
+		 <li class="active headerItem"><a href="#">Welcome <?php echo $username;?>!</a></li>
        
       </ul>
     </div>
