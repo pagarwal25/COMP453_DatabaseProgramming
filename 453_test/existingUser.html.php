@@ -14,15 +14,15 @@
 <h3>Sign-In to check your favorite homes</h3>
 
 <form action="?validateUser" method="POST">
- 
+
 		<input class ="inputStyle" type="text" id="username" name="username" placeholder=" Enter Username">
 		<br/>
 		<br/>
-		<input class ="inputStyle" type="text" id="password" name="password" placeholder=" Enter Password">	
+		<input class ="inputStyle" type="text" id="password" name="password" placeholder=" Enter Password">
 		<br/>
 		<br/>
 		<input class ="inputStyleSubmit" type="Submit" id="submit" value="submit">
-		
+
 </form>
 
 
@@ -38,11 +38,11 @@ $username=$_POST['username'];
 $password=$_POST['password'];
 
 try{
-	
-$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
+
+$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->exec('SET NAMES "utf8"');
-	
+
 }
 
 catch(PDOException $e){
@@ -67,12 +67,12 @@ if($password_db == $password)
 {
 header('Location: listingPage.html.php?username='.urlencode($username));
 //include 'listingPage.html.php';
- // header('Location: listingPage.html.php'.$username);  
+ // header('Location: listingPage.html.php'.$username);
 }
 else
 {
 	?>
-	
+
 	<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,12 +93,12 @@ else
 	<center>
   <p id="error" data-toggle="modal" data-target="#myModal"><font color="red">Error! Click here for details.</p>
   <!-- Trigger the modal with a button -->
-  
+
 	</center>
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -112,23 +112,23 @@ else
           <button type="button" class="btn btn-default" data-dismiss="modal">try again</button>
         </div>
       </div>
-      
+
     </div>
   </div>
-  
+
 </div>
 
 </body>
 </html>
 
   <?php
-	
-	
-	
-	
-	
+
+
+
+
+
 }
- 
+
 }
 
 
