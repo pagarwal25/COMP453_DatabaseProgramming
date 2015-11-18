@@ -40,7 +40,7 @@ $password=$_POST['password'];
 try{
 
 
-$pdo = new PDO('mysql:host=localhost;dbname=cozyhomes', 'root', 'c5shreelawns');
+$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->exec('SET NAMES "utf8"');
@@ -55,14 +55,14 @@ catch(PDOException $e){
 
 
 
-$sql = 'select PWDHash from userdetails where Exists (select username from userdetails where UserName=:username)';
+$sql = 'select Password from userdetails where Exists (select username from userdetails where UserName=:username)';
 
 
 $s = $pdo->prepare($sql);
 	$s->bindValue(':username', $username);
     $s->execute();
 	$result = $s->fetch();
-	$password_db = $result['password'];
+	$password_db = $result['Password'];
 
 
 if($password_db == $password)

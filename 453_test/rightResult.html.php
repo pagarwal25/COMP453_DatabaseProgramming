@@ -9,9 +9,7 @@ $username =$_POST['username'];
 try
 {
 
-
-  $pdo = new PDO('mysql:host=localhost;dbname=cozyhomes', 'root', 'c5shreelawns');
-
+  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $pdo->exec('SET NAMES "utf8"');
 }
@@ -58,13 +56,59 @@ catch (PDOException $e)
   exit();
   }
 
+  
+try{
+	  
+	$sql1 = 'SELECT * from userinterest where UserName = :username and userinterest.ApartmentID IN (
+
+						SELECT Apartment.ApartmentID
+						FROM Property, Apartment, propertytype 
+						WHERE propertytype.TypeID= apartment.TypeID AND
+						apartment.PropertyID = property.PropertyID AND
+						propertytype.TypeName = :TypeName AND
+						property.ZipCode = :ZipCode AND
+						Price BETWEEN :minPrice AND :maxPrice)';
+	 $s = $pdo->prepare($sql1);
+	 $s->bindValue(':username', $username);
+    $s->bindValue(':minPrice', $priceMin);
+    $s->bindValue(':maxPrice', $priceMax);
+	$s->bindValue(':ZipCode', $zipcode);
+	$s->bindValue(':TypeName', $type);
+	$s->execute();
+	$result1 = $s->fetchAll();	
+	
+	
+	$class = ($result1 > 0)? 'class="recorded"' : '';
+	
+}
+catch (PDOException $e)
+{
+  
+  $error = 'Unable to connect to the database server.';
+  include 'error.html.php';
+  exit();
+}
+  
+ 
+  
+  
+  
+  
+
+
   echo "data fetched";
 
 
 
 
+
   if (isset($_POST['like'])){
-	  echo "entered if";
+	  
+	  
+	  
+	  
+	  
+		  echo "entered if";
 		$ApartmentID = $_POST['ApartmentID'];
 		$PropertyName = $_POST['PropertyName'];
 		$TypeName = $_POST['TypeName'];
@@ -77,7 +121,7 @@ catch (PDOException $e)
 		try
 		{
 
-		$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
+		$pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$pdo->exec('SET NAMES "utf8"');
 		}
@@ -89,40 +133,104 @@ catch (PDOException $e)
 		exit();
 		}
 
-		 try
-		{
-		$sql = 'INSERT INTO userinterest SET
-        username = :username,
-        ApartmentID = :ApartmentID,
-        PropertyName = :PropertyName,
-        TypeName = :TypeName,
-		Price = :Price,
-		LeasePeriod = :LeasePeriod,
-		Address = :Address,
-		ZipCode = :ZipCode,
-		PhoneNo = :PhoneNo';
-		$s = $pdo->prepare($sql);
-		$s->bindValue(':username', $username);
-		$s->bindValue(':ApartmentID', $ApartmentID);
-		$s->bindValue(':PropertyName', $PropertyName);
-		$s->bindValue(':TypeName', $TypeName);
-		$s->bindValue(':Price', $Price);
-		$s->bindValue(':LeasePeriod', $LeasePeriod);
-		$s->bindValue(':Address', $Address);
-		$s->bindValue(':ZipCode', $ZipCode);
-		$s->bindValue(':PhoneNo', $PhoneNo);
+		
+		try{
+			
+			$sql_s ='SELECT COUNT(*) AS COUNT FROM userinterest WHERE  username = :username AND
+							  ApartmentID = :ApartmentID';
+					$s = $pdo->prepare($sql_s);
+					$s->bindValue(':username', $username);
+					$s->bindValue(':ApartmentID', $ApartmentID);
+					$s->execute(); 
+					$result_s = $s->fetch();	
+					
+					echo "entered select";
+					echo $result_s['COUNT'];
+					
+					if($result_s['COUNT'] == 1)
+				
+						{
+				
+						echo $result_s['COUNT'];
 
-		$s->execute();
-		}
+						try{
+						
+					
+					$sql_d = 'DELETE FROM userinterest WHERE username = :username AND
+							  ApartmentID = :ApartmentID';
+					$s = $pdo->prepare($sql_d);
+					$s->bindValue(':username', $username);
+					$s->bindValue(':ApartmentID', $ApartmentID);
+					$s->execute();
+					//header("Location:listingPage.html.php?username=$username");
+					
+						}
+				catch (PDOException $e)
+					{
+					$error = 'Error deleting department: ' . $e->getMessage();
+					include 'error.html.php';
+					exit();
+					}
+				}
+		
+		
+		
+		if($result_s['COUNT'] == 0){
+				
+		
+			try
+				{
+					echo "entered insert";
+				$sql = 'INSERT INTO userinterest SET
+				username = :username,
+				ApartmentID = :ApartmentID,
+				PropertyName = :PropertyName,
+				TypeName = :TypeName,
+				Price = :Price,
+				LeasePeriod = :LeasePeriod,
+				Address = :Address,
+				ZipCode = :ZipCode,
+				PhoneNo = :PhoneNo';
+				$s = $pdo->prepare($sql);
+				$s->bindValue(':username', $username);
+				$s->bindValue(':ApartmentID', $ApartmentID);
+				$s->bindValue(':PropertyName', $PropertyName);
+				$s->bindValue(':TypeName', $TypeName);
+				$s->bindValue(':Price', $Price);
+				$s->bindValue(':LeasePeriod', $LeasePeriod);
+				$s->bindValue(':Address', $Address);
+				$s->bindValue(':ZipCode', $ZipCode);
+				$s->bindValue(':PhoneNo', $PhoneNo);
+    
+				$s->execute();
+				}
 		catch (PDOException $e)
+			{
+				$error = 'Error adding in userinterest records: ' . $e->getMessage();
+				include 'error.html.php';
+				exit();
+			}
+		}
+					
+					
+					
+					
+					
+
+
+		 
+		
+		
+		
+		 }
+		 
+		 catch (PDOException $e)
 		{
-		$error = 'Error adding in userinterest records: ' . $e->getMessage();
+
+		$error = 'error';
 		include 'error.html.php';
 		exit();
 		}
-		header('Location: .');
-  exit();
-
   }
 ?>
 
@@ -137,14 +245,45 @@ catch (PDOException $e)
 <style>
 table,th,td
 {
-border:1px solid black;
+border:0px solid black;
 padding:5px;
+text-align:center;
+padding:10px;
 }
+td {
+    height: 100px;
+    vertical-align: center;
+}
+th{background:white}
+tr:nth-child(even) {background: #66b2ff}
+tr:nth-child(odd) {background: #FFF}
+body{
+	background:image:url('453_test/images/Rightframe.jpg'	);
+}
+.recorded{
+        border:2px red solid;
+        border-radius:5px; //round corner for modern browsers
+        -moz-border-radius:5px; //round corner for old mozilla
+        -webkit-border-radius:5px; //round corner for old Chrome or Safari
+        background: red;
+        box-shadow: 0 2px 4px red; //shadow for modern browsers
+        -moz-box-shadow: 0 2px 4px red; //shadow for old mozilla
+        -webkit-box-shadow: 0 2px 4px red; //shadow for old Chrome or Safari
+        font:italic bold 12px/14px sans-serif;
+        text-align:center;
+   }
+
+
 </style>
 </head>
-<body>
+<body style="font-family:Constantia;">
 
-    <h3>List of all the options:</h3>
+
+    <center><p style="text-align:center; font-family:Constantia; font-size:30px; font-weight:bold;">List of all the options:<p></center>
+   
+
+    
+
 
     <center>
 	<table >
@@ -161,17 +300,17 @@ padding:5px;
 	</tr>
     <?php foreach($result as $Apartment): ?>
       <tr>
-      <td> <?php echo $Apartment['PropertyName']; ?> </td>
-       <td style= "width:150px"> <?php echo $Apartment['TypeName']; ?> </td>
+      <td style= "width:150px"> <?php echo $Apartment['PropertyName']; ?> </td>
+       <td style= "width:200px"> <?php echo $Apartment['TypeName']; ?> </td>
         <td> <?php echo $Apartment['Price']; ?> </td>
-         <td> <?php echo $Apartment['LeasePeriod']; ?> </td>
+         <td style= "width:100px"> <?php echo $Apartment['LeasePeriod']; ?> </td>
 		 <td> <?php echo $Apartment['Address']; ?> </td>
-		 <td> <?php echo $Apartment['ZipCode']; ?> </td>
-		 <td> <?php echo $Apartment['PhoneNo']; ?> </td>
+		 <td style= "width:50px"> <?php echo $Apartment['ZipCode']; ?> </td>
+		 <td style= "width:150px"> <?php echo $Apartment['PhoneNo']; ?> </td>
 		 <td> <?php echo $Apartment['Rating']; ?> </td>
 		 <td>
 			<form action = "rightResult.html.php" method = "POST">
-				<input type="hidden" name="ApartmentID" value="<?php echo $Apartment['ApartmentID']; ?>">
+				<input type="hidden" id ="ApartmentID" name="ApartmentID" value="<?php echo $Apartment['ApartmentID']; ?>">
 				<input type="hidden" name="PropertyName" value="<?php echo $Apartment['PropertyName']; ?>">
 				<input type="hidden" name="TypeName" value="<?php echo $Apartment['TypeName']; ?>">
 				<input type="hidden" name="Price" value="<?php echo $Apartment['Price']; ?>">
@@ -186,16 +325,28 @@ padding:5px;
 				<input type="hidden" name="Property_type" value="<?php echo $type; ?>">
 				<input type="hidden" name="username" value="<?php echo $username; ?>">
 
-				<button type="submit" name="like"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+				<?php 
+					$class= "";
+					$inputType='submit';
+					foreach($result1 as $likedApartment)
+					{
+						if($Apartment['ApartmentID'] == $likedApartment['ApartmentID']){
+							$class= 'class="recorded"';
+							$inputType='sumbit';
+						}
+					}
+				?>
+				<button type="submit"  <?php echo $class; ?> name="like" id="like"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+				
 			</form>
 		 </td>
-         <!-- <td>
-         <form action="?deleteDept" method="post">
-          <input type="hidden" name="id" value="<?php echo $department['dnumber']; ?>">
-         <input type="submit" value="delete">
-        </form>
-      </td>  -->
+
+
+			
+        
+
       </tr>
+	 
     <?php endforeach; ?>
     </table>
 	</center>
