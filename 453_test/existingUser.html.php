@@ -46,7 +46,7 @@ $pdo->exec('SET NAMES "utf8"');
 }
 
 catch(PDOException $e){
-	$error = 'Unable to connect to server';
+	$error = 'Unable to connect to server ';
 	include 'error.html.php';
 	exit();
 }

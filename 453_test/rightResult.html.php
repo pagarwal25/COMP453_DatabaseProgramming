@@ -15,7 +15,7 @@ try
 }
 catch (PDOException $e)
 {
-  
+
   $error = 'Unable to connect to the database server.';
   include 'error.html.php';
   exit();
@@ -32,7 +32,7 @@ try{
 				   property.ZipCode,
 				   property.PhoneNo,
 				   property.Rating
-			FROM Property, Apartment, propertytype 
+			FROM Property, Apartment, propertytype
 			WHERE propertytype.TypeID= apartment.TypeID AND
 				  apartment.PropertyID = property.PropertyID AND
 				  propertytype.TypeName = :TypeName AND
@@ -44,8 +44,8 @@ try{
 	$s->bindValue(':ZipCode', $zipcode);
 	$s->bindValue(':TypeName', $type);
 	$s->execute();
-	$result = $s->fetchAll();	
-	
+	$result = $s->fetchAll();
+
 	//$result = $pdo->query($sql);
 }
 
@@ -55,6 +55,7 @@ catch (PDOException $e)
   include 'error.html.php';
   exit();
   }
+
   
 try{
 	  
@@ -93,6 +94,14 @@ catch (PDOException $e)
   
   
   
+
+
+  echo "data fetched";
+
+
+
+
+
   if (isset($_POST['like'])){
 	  
 	  
@@ -108,7 +117,7 @@ catch (PDOException $e)
 		$Address = $_POST['Address'];
 		$ZipCode = $_POST['ZipCode'];
 		$PhoneNo = $_POST['PhoneNo'];
-		
+
 		try
 		{
 
@@ -118,11 +127,12 @@ catch (PDOException $e)
 		}
 		catch (PDOException $e)
 		{
-  
+
 		$error = 'Unable to connect to the database server.';
 		include 'error.html.php';
 		exit();
 		}
+
 		
 		try{
 			
@@ -206,25 +216,21 @@ catch (PDOException $e)
 					
 					
 					
-		}
-		catch (PDOException $e)
+
+
+		 
+		
+		
+		
+		 }
+		 
+		 catch (PDOException $e)
 		{
-  
-		$error = 'Unable to fetch data from userdetails';
+
+		$error = 'error';
 		include 'error.html.php';
 		exit();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-			
-		
-
   }
 ?>
 
@@ -272,8 +278,13 @@ body{
 </head>
 <body style="font-family:Constantia;">
 
+
     <center><p style="text-align:center; font-family:Constantia; font-size:30px; font-weight:bold;">List of all the options:<p></center>
    
+
+    
+
+
     <center>
 	<table >
 	<tr>
@@ -285,7 +296,7 @@ body{
 	<th>ZipCode</th>
 	<th>PhoneNo</th>
 	<th>Rating</th>
-	
+
 	</tr>
     <?php foreach($result as $Apartment): ?>
       <tr>
@@ -307,12 +318,13 @@ body{
 				<input type="hidden" name="Address" value="<?php echo $Apartment['Address']; ?>">
 				<input type="hidden" name="ZipCode" value="<?php echo $Apartment['ZipCode']; ?>">
 				<input type="hidden" name="PhoneNo" value="<?php echo $Apartment['PhoneNo']; ?>">
-				
+
 				<input type="hidden" name="zipcode" value="<?php echo $zipcode; ?>">
 				<input type="hidden" name="minPrice" value="<?php echo $priceMin; ?>">
 				<input type="hidden" name="maxPrice" value="<?php echo $priceMax; ?>">
 				<input type="hidden" name="Property_type" value="<?php echo $type; ?>">
 				<input type="hidden" name="username" value="<?php echo $username; ?>">
+
 				<?php 
 					$class= "";
 					$inputType='submit';
@@ -328,12 +340,16 @@ body{
 				
 			</form>
 		 </td>
+
+
+			
         
+
       </tr>
 	 
     <?php endforeach; ?>
     </table>
 	</center>
-   
+
   </body>
 </html>

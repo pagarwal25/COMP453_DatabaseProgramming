@@ -146,7 +146,7 @@ input:focus {outline:none;}
 
    
 <form action ="" method ="POST">   
-   <H2><?php echo $username;?>!<h3> You can update your profile using the below form: </h3></H2>
+   <H2><?php echo $username;?>!</H2><h3> You can update your profile using the below form: </h3>
    
     <table>
     <?php foreach ($result as $userdetails): ?>

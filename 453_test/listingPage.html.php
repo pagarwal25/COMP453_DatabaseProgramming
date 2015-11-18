@@ -140,27 +140,7 @@ while ($row = $result->fetch()){
 
 
 
-<!--<div id="navlist">
-<p> Cozy Homes'</p>
-</div>
-<div id="content">
-	<ul id="navlist">
-			
-			
-			
-			
-			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
-			
-			<ul class="dropdown-menu">
-            <li><a href="#">edit</a></li>
-            <li><a href="#">History</a></li>
-            <li><a href="#">Logout</a></li> 
-			</ul>
-			</li>
-            <li><a href="">Welcome <?php echo $username;?>!</a></li>
-			
-	</ul>
- </div> -->
+
 </nav>
 <div class="bodycontent">
 <div id="ileftdiv">
