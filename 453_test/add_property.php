@@ -70,7 +70,7 @@ while ($row = $resultType->fetch()){
     	Apartment ID:<input type="text" name="aptID_new">
     	Price:<input type="text" name="price_newprop">
     	Lease Period:<input type="text" name="lease_newprop">
-
+	
 	<label for="Property_type">Property Type:</label></br>
   	<select name="Property_type" style="width:200px">
   		<option value="select">--Select--</option>

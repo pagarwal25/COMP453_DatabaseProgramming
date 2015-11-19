@@ -131,7 +131,7 @@ while ($row = $result->fetch()){
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="edit.html.php?username=<?php echo $username;?>">Edit</a></li>
-            <li><a href="#">History</a></li>
+            <li><a href="history.html.php?username=<?php echo $username;?>">History</a></li>
             <li><a href="index.html">Logout</a></li> 
           </ul>
         </li>

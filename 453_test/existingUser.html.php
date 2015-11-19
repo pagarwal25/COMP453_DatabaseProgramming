@@ -3,16 +3,31 @@
 <script type="text/javascript" src="js/Validation.js"></script>
 	<title>Cozy Homes' - Existing User</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<style>
+	body{
+		background-size: cover;
+	}
+	</style>
 <head>
 <body a link="black" vlink="black">
+<div id="bg">
+  <img id="myimage" src="/COMP453_DatabaseProgramming/453_test/images/sample3.jpg" alt="">
+        </div>
 
-<center><h1>Cozy Homes'</h1></center>
+<div id="divStyle">
+		<center><h1>Cozy Homes'</h1></center>
 <!--Menu -->
+
+<div id= "menuStyle">
 <center><a href="index.html">Home</a> | <a href="newUser.html">New-User</a> | <b> Existing-User</b> | <a href="administrator.html">Administrator</a> | <a href="aboutUs">About US</a></center>
+</div>
+
 <br/>
 <center>
-<h3>Sign-In to check your favorite homes</h3>
 
+<h3>Sign-In to check your favorite homes</h3>
+  <div id="formStyle">
 <form action="?validateUser" method="POST">
  
 		<input class ="inputStyle" type="text" id="username" name="username" placeholder=" Enter Username">
@@ -24,10 +39,11 @@
 		<input class ="inputStyleSubmit" type="Submit" id="submit" value="submit">
 		
 </form>
+</div>
 
 
 </center>
-
+</div>
 </body>
 </html>
 
