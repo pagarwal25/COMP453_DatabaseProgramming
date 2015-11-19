@@ -204,7 +204,7 @@ while ($row = $result->fetch()){
 </div>
 
 <div id="iRightDiv">
-	<iframe id="iRightFrame" src="right.html.php" scrolling="Yes" frameBorder="1" name="rightFrame" />
+	<iframe id="iRightFrame" src="right_admin.html.php" scrolling="Yes" frameBorder="1" name="rightFrame" />
 </div>
 
 

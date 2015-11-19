@@ -37,21 +37,24 @@ $username = $_GET['username'];
 $sql_zipcode = "SELECT distinct(ZipCode) FROM userinterest WHERE username='$username' ORDER BY ZipCode";
 $result_zipcode = $pdo->query($sql_zipcode);
 
-//selecting apartments, particular user is interested in 
-$sql_apartments = "SELECT * FROM userinterest WHERE username='$username' ORDER BY ZipCode";
-$result_apartments = $pdo->query($sql_apartments);
+
 
 ?>
 
 <html>
 <head>
+
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
 <script type="text/javascript">
+
+
 	window.onload = function() {
 		document.getElementById("popup").onclick = function(){
 			return !window.open(this.href, "pop", "width=500,height=600");
 		}
 	}
+	
 	
 </script>
 <style>
@@ -59,17 +62,61 @@ a{
 	color:white;
 	
 }
-</style>
-</head>
-<body vlink="white" link="white">
 
+</style>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="/COMP453_DatabaseProgramming/453_test/css/main_popup.css">
+
+</head>
+
+
+<body a link="black" vlink="black" >
+
+
+
+<nav class= "navbar nav-default  nav-fixed-top">
+
+<div class="container-fluid">
+   
+    <div id="content">
+      <ul id="navlist">
+       <p style="font-family:Constantia;">Cozy Homes'</p>
+		 <li class="active headerItem"><a href="index.html">Logout</a></li>
+		 <li class="active headerItem"><a href="listingPage.html.php?username=<?php echo $username;?>">Return</a></li>
+		  
+       
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+<center> <p style="top:1em; font-family: calibri;font-size:1.8em;color:gray;">List of all the apartments added in your interest list</p> </center>
+
+<hr width="50%">
 <br/>
 <?php foreach($result_zipcode as $zipcode){ ?>
 		<center><p style="background-color:#333333; color:white; font-size:1.5em; text-align:center;font-family:calibri; width:25%;"><a href="popup_agents.html.php?zipcode=<?php echo $zipcode['ZipCode'];?>" id="popup"><?php echo $zipcode['ZipCode'];?></a></p></center>
 		
-		<?php foreach($result_apartments as $apartments){
+		<?php
+		//selecting apartments, particular user is interested in 
+			$sql_apartments = "SELECT * FROM userinterest WHERE username='$username' AND ZipCode='".$zipcode['ZipCode']."' ORDER BY ZipCode";
+			$result_apartments = $pdo->query($sql_apartments); 
+			
+			
+			foreach($result_apartments as $apartments){
 
-			if($zipcode['ZipCode'] == $apartments['ZipCode']){?>
+			?>
 			
 				<center>
 				<p>Building Name: <?php echo $apartments['PropertyName'];?></p>
@@ -84,7 +131,7 @@ a{
 					<button type="submit"  name="unlike" id="unlike"><i class="glyphicon glyphicon-thumbs-down"></i></button>
 				</form><br/>
 				<?php 
-			} else{ break;}
+			
 			
 			
 			}
@@ -92,5 +139,22 @@ a{
 
 ?>
 
+
+
+																			
+
+<div id="boxes">
+  <div id="dialog" class="window">
+    Click on <b>Zipcode</b> to find <b>Agents</b>
+    <div id="popupfoot">  <a class="agree"style="color:red;" href="#">Got it!</a> </div>
+  </div>
+  <div id="mask"></div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script> 
+<script src="/COMP453_DatabaseProgramming/453_test/js/main_popup.js"></script> 
 </body>
+
+
+
 </html>
