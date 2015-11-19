@@ -82,6 +82,7 @@ a{
     <div id="content">
       <ul id="navlist">
        <p style="font-family:Constantia;">Cozy Homes'</p>
+		<li class="active headerItem"><form action="index.html"><button type="submit"  name="unlike" id="unlike"><i class="glyphicon glyphicon glyphicon-off"></i></button></form></li>
 		 <li class="active headerItem"><a href="index.html">Logout</a></li>
 		 <li class="active headerItem"><a href="listingPage.html.php?username=<?php echo $username;?>">Return</a></li>
 		  
@@ -89,12 +90,6 @@ a{
       </ul>
     </div>
   </div>
-
-
-
-
-
-
 
 </nav>
 
@@ -109,7 +104,7 @@ a{
 		<center><p style="background-color:#333333; color:white; font-size:1.5em; text-align:center;font-family:calibri; width:25%;"><a href="popup_agents.html.php?zipcode=<?php echo $zipcode['ZipCode'];?>" id="popup"><?php echo $zipcode['ZipCode'];?></a></p></center>
 		
 		<?php
-		//selecting apartments, particular user is interested in 
+		//selecting apartments, particular user is interested in ------ query inside foreach because records were not coming correctly
 			$sql_apartments = "SELECT * FROM userinterest WHERE username='$username' AND ZipCode='".$zipcode['ZipCode']."' ORDER BY ZipCode";
 			$result_apartments = $pdo->query($sql_apartments); 
 			
