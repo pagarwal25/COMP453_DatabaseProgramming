@@ -49,11 +49,7 @@ $result_zipcode = $pdo->query($sql_zipcode);
 <script type="text/javascript">
 
 
-	window.onload = function() {
-		document.getElementById("popup").onclick = function(){
-			return !window.open(this.href, "pop", "width=500,height=600");
-		}
-	}
+	
 	
 	
 </script>

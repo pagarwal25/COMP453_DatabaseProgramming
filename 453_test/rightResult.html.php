@@ -25,7 +25,9 @@ catch (PDOException $e)
 
 
 try{
-	$sql = 'SELECT Apartment.ApartmentID,
+	$sql = 'SELECT property.PropertyID,
+				   Apartment.aptNo,
+				   Apartment.ApartmentID,
 				   property.PropertyName,
 				   propertytype.TypeName,
 				   apartment.Price,
@@ -67,7 +69,7 @@ catch (PDOException $e)
 	  
 	  
 	  
-		  echo "entered if";
+		 // echo "entered if";
 		$ApartmentID = $_POST['ApartmentID'];
 		$PropertyName = $_POST['PropertyName'];
 		$TypeName = $_POST['TypeName'];
@@ -103,14 +105,14 @@ catch (PDOException $e)
 					$s->execute(); 
 					$result_s = $s->fetch();	
 					
-					echo "entered select";
-					echo $result_s['COUNT'];
+					//echo "entered select";
+					//echo $result_s['COUNT'];
 					
 					if($result_s['COUNT'] == 1)
 				
 						{
 				
-						echo $result_s['COUNT'];
+						//echo $result_s['COUNT'];
 
 						try{
 						
@@ -139,7 +141,7 @@ catch (PDOException $e)
 		
 			try
 				{
-					echo "entered insert";
+					//echo "entered insert";
 				$sql = 'INSERT INTO userinterest SET
 				username = :username,
 				ApartmentID = :ApartmentID,
@@ -277,25 +279,42 @@ body{
 	<table >
 	<tr>
 	<th>BuildingName</th>
-	<th>Aprtment Type</th>
+	<!-- <th>Aprtment Type</th>  -->
 	<th>Price</th>
 	<th>LeasePeriod (in mths)</th>
 	<th>Address</th>
-	<th>ZipCode</th>
+	<th>Apartment No.</th>
 	<th>PhoneNo</th>
 	<th>Rating</th>
+	<th>Click for more Info.</th>
+	<th>Interested?</th>
 
 	</tr>
     <?php foreach($result as $Apartment): ?>
       <tr>
       <td style= "width:150px"> <?php echo $Apartment['PropertyName']; ?> </td>
-       <td style= "width:200px"> <?php echo $Apartment['TypeName']; ?> </td>
+     <!-- <td style= "width:200px"> <?php echo $Apartment['TypeName']; ?> </td> --> 
         <td> <?php echo $Apartment['Price']; ?> </td>
          <td style= "width:100px"> <?php echo $Apartment['LeasePeriod']; ?> </td>
 		 <td> <?php echo $Apartment['Address']; ?> </td>
-		 <td style= "width:50px"> <?php echo $Apartment['ZipCode']; ?> </td>
+		 <td style= "width:50px"> <?php echo $Apartment['aptNo']; ?> </td>
 		 <td style= "width:150px"> <?php echo $Apartment['PhoneNo']; ?> </td>
 		 <td> <?php echo $Apartment['Rating']; ?> </td>
+		 
+		 
+		 <!-- more information code -->
+		 <td>
+		 
+		 <form action="popup_utility.html.php" method="POST" target="_blank" id="popup_utility" name="popup_utility">
+			 <input type="hidden" name="PropertyID" value="<?php echo $Apartment['PropertyID']; ?>">
+			 <input type="hidden" name="PropertyName" value="<?php echo $Apartment['PropertyName']; ?>">
+			 <input type="hidden" name="Price" value="<?php echo $Apartment['Price']; ?>">
+			 <input type="submit" name="moreInfo" id="moreInfo" value="More Information">
+		 </form>
+		 </td>
+		 
+		 
+		 <!-- interested icon code  -->
 		 <td>
 			<form action = "rightResult.html.php" method = "POST">
 				<input type="hidden" id ="ApartmentID" name="ApartmentID" value="<?php echo $Apartment['ApartmentID']; ?>">
