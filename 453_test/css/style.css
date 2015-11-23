@@ -97,8 +97,8 @@
 
 .inputStyleSubmit_left{
     border-radius: 7px;
-	background-color: #5c8a8a;
-	color:white;
+	background-color: #80bfff;
+	color:black;
 	height: 40px;
 	font-size: 0.8em;
 	border: 1px solid black;
@@ -262,6 +262,38 @@ input[type=range]::-webkit-slider-runnable-track {
   background: #3071a9;
   border-radius: 1.3px;
   border: 0.2px solid #010101;
+}
+
+#zip_left {
+	float: left;
+    width: 25%;
+    margin-top: 10px;
+    height: 100%;
+    border: 2px;
+   
+}
+
+#zip_right{
+	float: left;
+    width: 70%;
+    margin-top: 10px;
+    height: 80%;
+
+}
+
+.zip_bodycontent{
+	
+	float: left;
+    padding-left: 2%;
+    padding-right: 1%;
+    width: 97%;
+	height: 80%;
+}
+
+#zip_right_Frame{
+	width: 81%;
+    content: center;
+    height: 90%;
 }
 
 

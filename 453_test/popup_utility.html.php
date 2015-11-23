@@ -41,7 +41,7 @@ $result = $pdo->query($sql);
 <tr>
 <td><?php echo $utility['description'];?></td>
 <td><?php echo $utility['availability'];?></td>
-<td><?php echo $utility['charges'];?></td>
+<td>$<?php echo $utility['charges'];?></td>
 <?php $Price = $Price + $utility['charges']; ?>
 </tr>
 <?php 	

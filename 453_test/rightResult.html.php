@@ -294,7 +294,7 @@ body{
       <tr>
       <td style= "width:150px"> <?php echo $Apartment['PropertyName']; ?> </td>
      <!-- <td style= "width:200px"> <?php echo $Apartment['TypeName']; ?> </td> --> 
-        <td> <?php echo $Apartment['Price']; ?> </td>
+        <td> $<?php echo $Apartment['Price']; ?> </td>
          <td style= "width:100px"> <?php echo $Apartment['LeasePeriod']; ?> </td>
 		 <td> <?php echo $Apartment['Address']; ?> </td>
 		 <td style= "width:50px"> <?php echo $Apartment['aptNo']; ?> </td>
