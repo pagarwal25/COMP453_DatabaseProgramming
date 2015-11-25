@@ -1,87 +1,76 @@
 <?php
-try
-{
-
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'statavarthy', 'tata1988');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $pdo->exec('SET NAMES "utf8"');
- 
-}
-catch (PDOException $e)
-{
-  $error = 'Unable to connect to the database server.';
-  include 'error.html.php';
-  exit();
-}
-
-
-
-try
-{
-  $sql = 'SELECT * FROM apartment';
-  $result = $pdo->query($sql);
-
-}
-catch (PDOException $e)
-{
-  $error = 'Error fetching property: ' . $e->getMessage();
-  include 'error.html.php';
-  exit();
-}
-
-
+include 'dbRequests.php';
 
 if (isset($_GET['delete']))
 {
-	
-	$aptID = $_POST['apt_id'];
-	
-  try
-  {
-    $sql = "DELETE FROM apartment WHERE ApartmentID = '$aptID'";// is is coming from input type name="id"
-    $s = $pdo->prepare($sql);
-    //$s->bindValue(':apt_id', $_POST['apt_id']);
-    $s->execute();
-  }
-  catch (PDOException $e)
-  {
-    $error = 'Error deleting Apartment: ' . $e->getMessage();
-    include 'error.html.php';
-    exit();
-  }
-
+  $prop_id = $_POST['prop_id'];
+  $sql = "DELETE FROM property WHERE PropertyID = '$prop_id'"; // is coming from input type name="id"
+  $delete_property = executeQuery($sql);
 
 }
+$sql = "select * from property";
+
+$result = executeQuery($sql);
 
 ?>
 
 <html>
 <head>
-<title>List of Apartments to delete</title>
+<title>List of Properties to delete</title>
 <style>
-table,th,td
+table, th, td
+ {
+   border: 1px solid black;
+   border-collapse: collapse;
+ }
+ th, td
+ {
+   padding: 15px;
+ }
+
+.inputStyleSubmit
 {
-border:1px solid black;
-padding:5px;
+    padding: 16px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+      background-color: #008CBA;
+      color: white;
+      height:auto;
+      width: 140px;
+
 }
 </style>
 </head>
 <body>
 
-    <table >
-      <?php foreach ($result as $apartment):
+    <table style="width:50%">
+      <tr>
+        <th>PropertyName</th>
+        <th>Address</th>
+        <th>ZipCode</th>
+        <th>PhoneNo</th>
+
+      </tr>
+      <?php foreach ($result as $property):
       ?>
+
         <tr>
-        <td> <?php echo $apartment['ApartmentID']; ?> </td>
-        <td style= "width:150px"> <?php echo $apartment['PropertyID']; ?> </td>
-          <td> <?php echo $apartment['Price']; ?> </td>
-           <td> <?php echo $apartment['LeasePeriod']; ?> </td>
-           <td> <?php echo $apartment['TypeID']; ?> </td>
+
+        <td style= "width:150px"> <?php echo $property['PropertyName']; ?> </td>
+          <td> <?php echo $property['Address']; ?> </td>
+           <td> <?php echo $property['ZipCode']; ?> </td>
+           <td> <?php echo $property['PhoneNo']; ?> </td>
 
            <td>
            <form action="?delete" method="post">
-            <input type="hidden" name="apt_id" value="<?php echo $apartment['ApartmentID']; ?>">
-           <input type="submit" value="delete">
+            <input type="hidden" name="prop_id" value="<?php echo $property['PropertyID']; ?>">
+           <input class="inputStyleSubmit" input type="submit" value="Delete">
           </form>
         </td>
         </tr>
@@ -90,4 +79,3 @@ padding:5px;
 
     </table>
     </body>
-  </html>

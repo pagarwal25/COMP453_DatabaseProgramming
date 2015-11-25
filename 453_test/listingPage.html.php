@@ -5,6 +5,9 @@ if(isset($_POST['telephone'])){
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+
+$password_hashed=password_hash($password,PASSWORD_DEFAULT);
+
 $email = $_POST['email'];
 $telephone = $_POST['telephone'];
 $PostCode = $_POST['zip'];
@@ -38,7 +41,7 @@ try
 		PostCode=:zipcode';
     $s = $pdo->prepare($sql);
     $s->bindValue(':username', $username);
-    $s->bindValue(':password', $password);
+    $s->bindValue(':password', $password_hashed);
     $s->bindValue(':email', $email);
 	$s->bindValue(':telephone', $telephone);
 	$s->bindValue(':zipcode', $PostCode);
