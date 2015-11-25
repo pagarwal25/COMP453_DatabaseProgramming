@@ -11,9 +11,9 @@
 	</style>
 <head>
 <body a link="black" vlink="black">
-<div id="bg">
+<!--<div id="bg">
   <img id="myimage" src="/COMP453_DatabaseProgramming/453_test/images/sample3.jpg" alt="">
-        </div>
+        </div> -->
 
 <div id="divStyle">
 		<center><h1>Cozy Homes'</h1></center>
@@ -52,6 +52,7 @@ if(isset($_GET['validateUser'])){
 
 $username=$_POST['username'];
 $password=$_POST['password'];
+//$password= password_hash($password,PASSWORD_DEFAULT);
 
 try{
 
@@ -85,8 +86,8 @@ $s = $pdo->prepare($sql);
 	$result = $s->fetch();
 	$password_db = $result['Password'];
 
-
-if($password_db == $password)
+//($password_db == $password)
+if (password_verify($password,$password_db))
 {
 header('Location: listingPage.html.php?username='.urlencode($username));
 //include 'listingPage.html.php';

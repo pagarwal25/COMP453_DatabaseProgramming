@@ -1,99 +1,61 @@
 <?php
-
-
-
-
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-try
+include 'dbRequests.php';
+session_start();
+if(isset($_SESSION['email']))
 {
-
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $pdo->exec('SET NAMES "utf8"');
+  $email = $_SESSION['email'];
 }
-catch (PDOException $e)
+else
 {
-
-  $error = 'Unable to connect to the database server.';
-  include 'error.html.php';
-  exit();
-}
-
-try
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  try
   {
+    $sql="select UserName,PwdHash from admindetails where UserName='$email' ";// fetching Username and compare it with testbox adminid.
+    $result = executeQuery($sql);
 
-            $sql="select UserName,PwdHash from admindetails where UserName='$email' ";// fetching Username and compare it with testbox adminid.
-          $result = $pdo->query($sql);
+    if($result->rowcount()== 0)
+    {
+      echo "AdminId or password incorrect!";
+      $database_adminid=" ";
+      $database_password=" ";
+    }
+    else
+    {
+      foreach($result as $row)//fetching adminid and password from DB as it's a more than 1 column, let's put foreach
+      {
+        $database_adminid= $row['UserName'];
+        $database_password= $row['PwdHash'];
+      }
+    }
 
-          if($result->rowcount()== 0)
-          {
-            echo "AdminId or password incorrect!";
-            $database_adminid=" ";
-            $database_password=" ";
-          }
-          else
-          {
-            foreach($result as $row)//fetching adminid and password from DB as it's a more than 1 column, let's put foreach
-            { $database_adminid= $row['UserName'];
-              $database_password= $row['PwdHash'];
-            }
-
-          }
-
-          if($database_adminid==$email && $database_password==$password)
-            {
-            echo "login successfull!!!";
-            }
-
-          else
-           {
-            echo "Login Unsuccessful!! Try again!!";
-           }
-
+    if($database_adminid==$email && $database_password==$password)
+    {
+      echo "login successfull!!!";
+      $_SESSION['email'] = $email;
+    }
+    else
+    {
+    echo "Login Unsuccessful!! Try again!!";
+    }
   }
-catch (Exception $e)
+  catch (Exception $e)
+  {
+    echo $e;
+    $error = 'Database error ';
+    include 'error.html.php';
+    exit();
+  }
+  # code...
+}
+
+$sql = 'SELECT TypeName FROM propertytype';
+$result = executeQuery($sql);
+
+while ($row = $result->fetch())
 {
-  echo $e;
-  $error = 'Database error ';
-  include 'error.html.php';
-  exit();
-}
-
-
-
-
-try
-{
-
-  $pdo = new PDO('mysql:host=localhost;dbname=cozy_homes', 'pagarwal', 'pa251188');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $pdo->exec('SET NAMES "utf8"');
-}
-catch (PDOException $e)
-{
-
-  $error = 'Unable to connect to the database server.';
-  include 'error.html.php';
-  exit();
-}
-
-try{
-	$sql_PropertyType= 'SELECT TypeName FROM propertytype';
-	$result = $pdo->query($sql_PropertyType);
-}
-
-catch(PDOException $e){
-	$error = 'error selecting Property Type'. $e->getMessage();
-		include 'error.html.php';
-		exit();
-}
-
-while ($row = $result->fetch()){
 	$TypeName[] = $row['TypeName'];
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -114,44 +76,56 @@ while ($row = $result->fetch()){
 		var maxPrice= document.getElementById('maxPrice');
 		maxPrice.value = val;
 	}
+	
+	function jsAddApartment()
+	{document.getElementById('iRightFrame').src='add_apartment.php';}
 
 	</script>
 
-	<!--  <meta name="viewport" content="width=device-width, initial-scale=1">  -->
-	<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
-	<!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>  -->
-	<!-- <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>  -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 
 
 </head>
-<body a link="black" vlink="white">
+<body a link="black" vlink="black" style="font-family:Constantia;">
 <div id="everything">
+
+
+
+
+
+
 <nav class= "navbar nav-default  nav-fixed-top">
-<div id="navlist">
-<p> Cozy Homes'</p>
-</div>
-<div id="content">
-	<ul id="navlist">
-			<!-- <li><a href="">Bla</a></li>
-            <li><a href="">More bla</a></li>
-            <li><a href="">Super bla</a></li>
-            <li><a href="">Bhooo</a></li>
-            <li><a href="">Bhaaoo</a></li>
-            <li><a href="">Bhootttttt</a></li> -->
-			<li><a href="">Welcome <?php echo $email;?>!</a></li>
-	</ul>
- </div>
+
+<div class="container-fluid">
+   
+    <div id="content">
+      <ul id="navlist">
+			<p style="font-family:Constantia;">Cozy Homes'</p>
+		 <li class="active headerItem"><a href="#">Welcome <?php echo $email;?>!</a></li>
+       
+      </ul>
+    </div>
+  </div>
+
 </nav>
+
+
+
+
 <div class="bodycontent">
 <div id="ileftdiv">
 	<form action="rightResult.html.php"  method="post" id="input_form" name="inputform" class="inputForm" target="rightFrame">
 	<div>
 
 
-        <input type="hidden" name="email" id="email" value="<?php echo $email;?>">
+        <input type="hidden" name="username" id="username" value="<?php echo $email;?>">
     </div>
-
+<center>Search Apartments</center>
 	<div>
      <label for="zipcode">ZipCode:</label></br>
 
@@ -159,7 +133,7 @@ while ($row = $result->fetch()){
     </div>
 
 
-	
+
 
 	 <div>
 	  <label for="price-min">Price Min.:</label>
@@ -190,30 +164,31 @@ while ($row = $result->fetch()){
 		<?php endforeach; ?>
 		</select>
      </div>
-
 	 <div>
-     <input type="submit" value="Search">
+     <input type="submit" value="submit">
 	 </div>
+	<ul> Control Apartments</ul>
    <div>
-     <input type="button" onClick="location.href='add_property.php'" value="Add new property">
-     <input type="button" onClick="location.href='modify_property.php'" value="Modify property">
-     <input type="button" onClick="location.href='delete_property.php'" value="Delete property">
+     <button type="button"  onClick="jsAddApartment()" >Add New Apartment</button><br>
+     <input type="button" onClick="location.href='modify_apartment.php'" value="Modify apartment"><br>
+     <input type="button" onClick="location.href='delete_apartment.php'" value="Delete apartment"><br><br>
+    
+	<center>Control Properties</center>
+	
+	<input type="button" onClick="location.href='add_property.php'" value="Add New Property"><br>
+     <input type="button" onClick="location.href='modify_property.php'" value="Modify Property"><br>
+     <input type="button" onClick="location.href='delete_property.php'" value="Delete Property"><br><br>
+     <input type="button" onClick="location.href='new_listing.php'" value="New Listing"><br><br>
+
+     <input type="button" onClick="location.href='admin_update_trigger.php'" value="History"><br>
 
    </div>
     </form>
 </div>
-
 <div id="iRightDiv">
 	<iframe id="iRightFrame" src="right_admin.html.php" scrolling="Yes" frameBorder="1" name="rightFrame" />
 </div>
-
-
 </div>
-
-
-
-
 </div>
-
 </body>
 <html>
