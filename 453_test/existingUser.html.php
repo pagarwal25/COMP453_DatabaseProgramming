@@ -20,7 +20,7 @@
 <!--Menu -->
 
 <div id= "menuStyle">
-<center><a href="index.html">Home</a> | <a href="newUser.html">New-User</a> | <b> Existing-User</b> | <a href="administrator.html">Administrator</a> | <a href="aboutUs">About US</a></center>
+<center><a href="index.html">Home</a> | <a href="newUser.html">New-User</a> | <b> Existing-User</b> | <a href="administrator.html">Administrator</a> | <a href="aboutUs.html">About US</a></center>
 </div>
 
 <br/>

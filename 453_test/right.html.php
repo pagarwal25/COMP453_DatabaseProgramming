@@ -4,7 +4,7 @@
     <style>
       #map {
         width: 1055px;
-        height: 490px;
+        height: 455px;
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
